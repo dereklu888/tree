@@ -1,0 +1,33 @@
+.chart div {
+  font: 15px sans-serif;
+  background-color: blue;
+  margin: 1px;
+  padding: 3px;
+  text-align: right;
+  color: white;
+}
+
+.links line {
+  stroke: #999;
+  stroke-opacity: 0.6;
+}
+ 
+.nodes circle {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+    font: 12px sans-serif;
+}
+
+.desc {
+  font: 14px sans-serif;
+}
