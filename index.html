@@ -2,6 +2,7 @@
    <!--https://drive.google.com/file/d/126X-RQ0gHO2z_Bv51cf1qA-zf-QL8mA4/view?usp=sharing-->
   <head>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css"href="index.css">
     <meta charset="UTF-8">
     <style>
@@ -151,7 +152,7 @@
                           .nodes(nodes_data);
 
         // Used to store currently selected node
-        var past = null;
+        var past = null
 
         // Text objects for displaying selected node data
         var detailLabel = d3.select("body").append("p").text("Select a node to begin.").attr("class", "desc").style("color", textColor);
@@ -191,6 +192,8 @@
           .text(function(d) { return d.name; })
           .style("fill", textColor);
 
+
+        var pastname = "start";
         // Draw nodes
         var node = gnodes.append("circle")
           .attr("class", "node")
@@ -207,23 +210,38 @@
           })
           // Select and on click node actions
           .on("mousedown", function(d) {
+
+
             // Unselect previous node if selected
-            if(past != null) {
+            if(past != null && pastname != d.name) {
               past.style("stroke-width", 0);
             }
 
-            // Remove previous text
-            detailLabel.remove();
-            detailLabelDesc.remove();
+            if(pastname != d.name || pastname=="start"){
+              detailLabel.remove();
+              detailLabelDesc.remove();
 
-            // Add border to selected node
-            past = d3.select(this).style("stroke", strokeColor)
-              .style("stroke-width", strokeWidth);
+              // Add border to selected node
+              past = d3.select(this)
+                .style("stroke", strokeColor)
+                .style("stroke-width", strokeWidth);
+              pastname = d.name;
+              // Set text
+              detailLabel = d3.select("body").append("p").text("Selected node: " + d.name).attr("class", "desc").style("color", textColor);
+              detailLabelDesc = d3.select("body").append("p").text(makeRandSentence(10)).attr("class", "desc").style("color", textColor);
+              $("p").hide();
+              $("p").fadeIn(1000);
 
-            // Set text
-            detailLabel = d3.select("body").append("p").text("Selected node: " + d.name).attr("class", "desc").style("color", textColor);
-            detailLabelDesc = d3.select("body").append("p").text(makeRandSentence(10)).attr("class", "desc").style("color", textColor);
+            }
+
+
+
+
+
+
           });
+
+
 
         simulation.on("tick", tickActions);
 
