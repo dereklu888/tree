@@ -66,6 +66,10 @@
 
       // For future use
       var storedColor = "#202020";
+      
+      // Text display variables
+      var initialText = "Select node to begin. (Press 'R' to reset zoom)";
+      var initialDesc = "";
 
       // Example text for testing
       var exampleText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \
@@ -73,8 +77,6 @@
       Phasellus quam purus, vulputate sit amet nunc in, feugiat aliquam mi. Ut vel elementum magna. \
       Nullam consectetur venenatis diam id auctor. Ut sagittis a nisi sit amet efficitur. \
       Aenean sit amet commodo risus. Donec dapibus ultrices odio, ut consequat libero viverra vel. ";
-
-      // Data variables
 
       // Nodes information
       var nodes_data =  [
@@ -138,12 +140,13 @@
         {"source": "Jack", "target": "Alexis", "type":"E"},
         {"source": "Thompson", "target": "Jack", "type":"A"}
       ]
-
+      
         // Force graph
         var svg2 = d3.select("body")
                     .append("svg")
                     .attr("width", w)
-                    .attr("height", h);
+                    .attr("height", h)
+                    .call(d3.zoom().on("zoom", zoom_actions));
 
         d3.select("body").style("background-color", backgroundColor);
 
@@ -154,8 +157,8 @@
         var past = null;
 
         // Text objects for displaying selected node data
-        var detailLabel = d3.select("body").append("p").text("Select a node to begin.").attr("class", "desc").style("color", textColor);
-        var detailLabelDesc = d3.select("body").append("p").text("").attr("class", "desc").style("color", textColor);
+        var detailLabel = d3.select("body").append("p").text(initialText).attr("class", "desc").style("color", textColor);
+        var detailLabelDesc = d3.select("body").append("p").text(initialDesc).attr("class", "desc").style("color", textColor);
 
         // Set repulsiveness force, charge strength
         simulation.force("charge_force", d3.forceManyBody()
@@ -226,6 +229,11 @@
           });
 
         simulation.on("tick", tickActions);
+        
+        var zoom_handler = d3.zoom()
+          .on("zoom", zoom_actions);
+          
+        svg2.call(zoom_handler);
 
         // Set drag handlers
         var drag_handler = d3.drag()
@@ -234,7 +242,15 @@
           .on("end", drag_end);
 
         drag_handler(node);
-
+        
+        window.onkeyup = function(e) {
+          let key = e.key.toUpperCase();
+          
+          if (key == 'R') {
+            svg2.call(zoom_handler.transform, d3.zoomIdentity.scale(1));
+          }
+        }
+        
         // Random text functions for testing
         function makeRandText(count) {
           var text = "";
@@ -301,6 +317,12 @@
           if (!d3.event.active) simulation.alphaTarget(0);
           d.fx = null;
           d.fy = null;
+        }
+        
+        function zoom_actions(){
+          node.attr("transform", d3.event.transform);
+          link.attr("transform", d3.event.transform);
+          labels.attr("transform", d3.event.transform);
         }
 
       </script>
