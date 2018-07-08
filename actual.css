@@ -1,0 +1,85 @@
+h1 {
+  font: 50px sans-serif;
+  text-align: center;
+  color: white;
+  
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+h2 {
+  font: 14px sans-serif;
+  text-align: center;
+  color: white;
+  
+  
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+h3 {
+  font: 16px sans-serif;
+  text-align: center;
+  color: #777777;
+  
+  position: absolute;
+  top: 77%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+body {
+  background-color: #202020;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 2px 0px;
+  overflow: hidden;
+  background-color: #202020;
+  
+  position: absolute;
+  bottom: 0;
+  
+  align: right;
+}
+
+li {
+  float: left;
+
+}
+
+li a {
+  display: block;
+  color: #505050;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font: 14px sans-serif;
+}
+
+.credits {
+  display: block;
+  float: right;
+  color: #606060;
+  font: 14px sans-serif;
+  padding: 4px 16px;
+  text-align: center;
+  align: right;
+  text-decoration: none;
+  
+  position: relative;
+  bottom: 0;
+  
+  float: bottom;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    color: grey;
+}

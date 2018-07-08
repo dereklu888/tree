@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css"href="actual.css">
+    <meta charset="UTF-8">
+    <style>
+    
+    </style>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      var mainUrl = "index.html";
+      
+      var aboutUrl = "about.html";
+      var infoUrl = "info.html";
+      var contactUrl = "contact.html";
+      var donateUrl = "donate.html"
+      
+      $('html').click( function (e) { 
+        if ( e.target == this ) 
+          document.location.href = mainUrl;
+      });
+      
+      (function() {
+        var faded = false;
+        
+        window.setInterval(function() {
+          if(faded) {
+            $("h3").fadeOut(1500);
+          } else {
+            $("h3").fadeIn(1500);
+          }
+          faded = !faded;
+        }, 250);
+      })();
+    </script>
+    <h1>Something Tree</h1>
+    <h2>A website for things that are in a tree.</h2>
+    <h3>Click to begin.</h3>
+    
+    <table>
+      <ul>
+        <li><a href=aboutUrl>About</a></li>
+        <li><a href=infoUrl>Info</a></li>
+        <li><a href=contactUrl>Contact</a></li>
+        <li><a href=donateUrl>Donate</a></li>
+      </ul>
+        <p class="credits">Created by Derek, Vineeth, and Richard</p>
+
+      
+    </table>
+    
+  </body>
+
+</html>
