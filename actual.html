@@ -5,22 +5,24 @@
     <link rel="stylesheet" type="text/css"href="actual.css">
     <meta charset="UTF-8">
     <style>
-    
+
     </style>
   </head>
 
   <body>
     <script type="text/javascript">
       var mainUrl = "index.html";
-      
-      $('html').click( function (e) { 
-        if ( e.target == this ) 
+
+      $("html").on("click", function (e) {
+        if ( e.target == this )
+          document.location.href = mainUrl;
+        else if ((event || event.target || event.target.type == 'html') || (window.event || window.event.srcElement || window.event.srcElement.type == 'html'))
           document.location.href = mainUrl;
       });
-      
+
       (function() {
         var faded = false;
-        
+
         window.setInterval(function() {
           if(faded) {
             $("h3").fadeOut(1500);
@@ -35,7 +37,7 @@
     <h1>Something Tree</h1>
     <h2>A website for things that are in a tree.</h2>
     <h3>Click to begin.</h3>
-    
+
     <table>
       <ul>
         <li><a href="about.html">About</a></li>
@@ -45,9 +47,9 @@
       </ul>
         <p class="credits">Created by Derek, Vineeth, and Richard</p>
 
-      
+
     </table>
-    
+
   </body>
 
 </html>
