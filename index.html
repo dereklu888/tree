@@ -52,7 +52,7 @@
       // Node selected border color
       var strokeWidth = 1.25;
       var strokeColor = "white";
-      
+
       // Limits for zooming
       // First value is for zoom out,
       //  smaller value allows greater zoom out
@@ -73,7 +73,7 @@
 
       // For future use
       var storedColor = "#202020";
-      
+
       // Text display variables
       var initialText = "Select node to begin. (Press 'R' to reset zoom)";
       var initialDesc = "";
@@ -111,7 +111,7 @@
         {"name": "Jonathan", "sex" : "M"},
         {"name": "Jack", "sex" : "M"}
       ];*/
-      
+
       var rand_nodes = [];
 
       // Links information
@@ -149,15 +149,15 @@
         {"source": "Jack", "target": "Alexis", "type":"E"},
         {"source": "Thompson", "target": "Jack", "type":"A"}
       ];*/
-      
+
       var rand_links = [];
-      
+
       makeRandNodes(50);
       makeRandLinks();
-      
+
       var nodes_data = rand_nodes;
       var link_data = rand_links;
-      
+
       // Force graph
       var svg2 = d3.select("body")
                   .append("svg")
@@ -212,7 +212,7 @@
         .style("fill", textColor);
 
       var pastname = "start";
-      
+
       // Draw nodes
       var node = gnodes.append("circle")
         .attr("class", "node")
@@ -243,7 +243,7 @@
               .style("stroke", strokeColor)
               .style("stroke-width", strokeWidth);
             pastname = d.name;
-            
+
             // Set text
             detailLabel = d3.select("body").append("p").text("Selected node: " + d.name).attr("class", "desc").style("color", textColor);
             detailLabelDesc = d3.select("body").append("p").text(makeRandSentence(10)).attr("class", "desc").style("color", textColor);
@@ -253,14 +253,14 @@
           }
 
         });
-          
+
         simulation.on("tick", tickActions);
-        
+
         // Zoom instanstiation
         var zoom_handler = d3.zoom()
           .scaleExtent(zoomLimits)
           .on("zoom", zoom_actions);
-          
+
         // Call zoom on svg frame
         svg2.call(zoom_handler);
 
@@ -271,15 +271,15 @@
           .on("end", drag_end);
 
         drag_handler(node);
-        
+
         window.onkeyup = function(e) {
           let key = e.key.toUpperCase();
-          
+
           if (key == 'R') {
             svg2.call(zoom_handler.transform, d3.zoomIdentity.scale(1));
           }
         }
-        
+
         // Random text functions for testing
         function makeRandText(count) {
           var text = "";
@@ -309,7 +309,7 @@
 
           return text;
         }
-        
+
         function makeRandNodes(count) {
           var values;
           for(var i = 0; i < count; i++) {
@@ -318,7 +318,7 @@
             rand_nodes.push(values);
           }
         }
-        
+
         function makeRandLinks() {
           var num = Math.floor(rand_nodes.length * 1.25);
           var s;
@@ -372,7 +372,7 @@
           d.fx = null;
           d.fy = null;
         }
-        
+
         // Zoom handler
         function zoom_actions(){
           node.attr("transform", d3.event.transform);
