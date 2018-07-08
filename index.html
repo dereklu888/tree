@@ -1,5 +1,4 @@
 <html>
-   <!--https://drive.google.com/file/d/126X-RQ0gHO2z_Bv51cf1qA-zf-QL8mA4/view?usp=sharing-->
   <head>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
@@ -53,6 +52,13 @@
       // Node selected border color
       var strokeWidth = 1.25;
       var strokeColor = "white";
+      
+      // Limits for zooming
+      // First value is for zoom out,
+      //  smaller value allows greater zoom out
+      // Second value is for zoom in,
+      //  reater value allows greater zoom in
+      var zoomLimits = [0.5, 4];
 
       // Spacing of labels from node
       var labelSpacingX = 7;
@@ -80,7 +86,7 @@
       Aenean sit amet commodo risus. Donec dapibus ultrices odio, ut consequat libero viverra vel. ";
 
       // Nodes information
-      var nodes_data =  [
+      /*var nodes_data =  [
         {"name": "Lillian", "sex": "F"},
         {"name": "Gordon", "sex": "F"},
         {"name": "Sylvester", "sex": "M"},
@@ -104,10 +110,12 @@
         {"name": "Alexis", "sex" : "M"},
         {"name": "Jonathan", "sex" : "M"},
         {"name": "Jack", "sex" : "M"}
-      ]
+      ];*/
+      
+      var rand_nodes = [];
 
       // Links information
-      var link_data = [
+      /*var link_data = [
         {"source": "Sylvester", "target": "Gordon", "type":"A" },
         {"source": "Sylvester", "target": "Lillian", "type":"A" },
         {"source": "Sylvester", "target": "Mary", "type":"A"},
@@ -140,117 +148,120 @@
         {"source": "Alexis", "target": "John", "type":"A"},
         {"source": "Jack", "target": "Alexis", "type":"E"},
         {"source": "Thompson", "target": "Jack", "type":"A"}
-      ]
+      ];*/
       
-        // Force graph
-        var svg2 = d3.select("body")
-                    .append("svg")
-                    .attr("width", w)
-                    .attr("height", h)
-                    .call(d3.zoom().on("zoom", zoom_actions));
+      var rand_links = [];
+      
+      makeRandNodes(50);
+      makeRandLinks();
+      
+      var nodes_data = rand_nodes;
+      var link_data = rand_links;
+      
+      // Force graph
+      var svg2 = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h)
+                  .call(d3.zoom().on("zoom", zoom_actions));
 
-        d3.select("body").style("background-color", backgroundColor);
+      d3.select("body").style("background-color", backgroundColor);
 
-        var simulation = d3.forceSimulation()
-                          .nodes(nodes_data);
+      var simulation = d3.forceSimulation()
+                        .nodes(nodes_data);
 
-        // Used to store currently selected node
-        var past = null
+      // Used to store currently selected node
+      var past = null
 
-        // Text objects for displaying selected node data
-        var detailLabel = d3.select("body").append("p").text(initialText).attr("class", "desc").style("color", textColor);
-        var detailLabelDesc = d3.select("body").append("p").text(initialDesc).attr("class", "desc").style("color", textColor);
+      // Text objects for displaying selected node data
+      var detailLabel = d3.select("body").append("p").text(initialText).attr("class", "desc").style("color", textColor);
+      var detailLabelDesc = d3.select("body").append("p").text(initialDesc).attr("class", "desc").style("color", textColor);
 
-        // Set repulsiveness force, charge strength
-        simulation.force("charge_force", d3.forceManyBody()
-          .strength(-nodeCharge));
+      // Set repulsiveness force, charge strength
+      simulation.force("charge_force", d3.forceManyBody()
+        .strength(-nodeCharge));
 
-        // Apply force pointing toward center
-        simulation.force("center_force", d3.forceCenter(w/2, h/2));
+      // Apply force pointing toward center
+      simulation.force("center_force", d3.forceCenter(w/2, h/2));
 
-        var link_force = d3.forceLink(link_data)
-                          .id(function(d) {return d.name});
+      var link_force = d3.forceLink(link_data)
+                        .id(function(d) {return d.name});
 
-        simulation.force("links", link_force);
+      simulation.force("links", link_force);
 
-        // Draw links
-        var link = svg2.append("g")
-          .attr("class", "links")
-          .selectAll("line")
-          .data(link_data)
-          .enter()
-          .append("line")
-          .attr("stroke-width", 2);
+      // Draw links
+      var link = svg2.append("g")
+        .attr("class", "links")
+        .selectAll("line")
+        .data(link_data)
+        .enter()
+        .append("line")
+        .attr("stroke-width", 2);
 
-        // Create label + node group
-        var gnodes = svg2.selectAll("g.gnode")
-          .data(nodes_data)
-          .enter()
-          .append("g")
-          .classed("gnode", true);
+      // Create label + node group
+      var gnodes = svg2.selectAll("g.gnode")
+        .data(nodes_data)
+        .enter()
+        .append("g")
+        .classed("gnode", true);
 
-        // Draw labels
-        var labels = gnodes.append("text")
-          .attr("class", "unselectable")
-          .text(function(d) { return d.name; })
-          .style("fill", textColor);
+      // Draw labels
+      var labels = gnodes.append("text")
+        .attr("class", "unselectable")
+        .text(function(d) { return d.name; })
+        .style("fill", textColor);
 
+      var pastname = "start";
+      
+      // Draw nodes
+      var node = gnodes.append("circle")
+        .attr("class", "node")
+        .attr("r", 5)
+        .attr("fill", function(d) {
+          // Set node color based on name length
+          // Should be changed later
+          if(d.name.length > 7) {
+            return "pink";
+          } else if(d.name.length > 4) {
+            return "orange";
+          }
+          return "red";
+        })
+        // Select and on click node actions
+        .on("mousedown", function(d) {
+          // Unselect previous node if selected
+          if(past != null && pastname != d.name) {
+            past.style("stroke-width", 0);
+          }
 
-        var pastname = "start";
-        // Draw nodes
-        var node = gnodes.append("circle")
-          .attr("class", "node")
-          .attr("r", 5)
-          .attr("fill", function(d) {
-            // Set node color based on name length
-            // Should be changed later
-            if(d.name.length > 6) {
-              return "pink";
-            } else if(d.name.length > 5) {
-              return "orange";
-            }
-            return "red";
-          })
-          // Select and on click node actions
-          .on("mousedown", function(d) {
+          if(pastname != d.name || pastname=="start"){
+            detailLabel.remove();
+            detailLabelDesc.remove();
 
+            // Add border to selected node
+            past = d3.select(this)
+              .style("stroke", strokeColor)
+              .style("stroke-width", strokeWidth);
+            pastname = d.name;
+            
+            // Set text
+            detailLabel = d3.select("body").append("p").text("Selected node: " + d.name).attr("class", "desc").style("color", textColor);
+            detailLabelDesc = d3.select("body").append("p").text(makeRandSentence(10)).attr("class", "desc").style("color", textColor);
+            $("p").hide();
+            $("p").fadeIn(1000);
 
-            // Unselect previous node if selected
-            if(past != null && pastname != d.name) {
-              past.style("stroke-width", 0);
-            }
+          }
 
-            if(pastname != d.name || pastname=="start"){
-              detailLabel.remove();
-              detailLabelDesc.remove();
-
-              // Add border to selected node
-              past = d3.select(this)
-                .style("stroke", strokeColor)
-                .style("stroke-width", strokeWidth);
-              pastname = d.name;
-              // Set text
-              detailLabel = d3.select("body").append("p").text("Selected node: " + d.name).attr("class", "desc").style("color", textColor);
-              detailLabelDesc = d3.select("body").append("p").text(makeRandSentence(10)).attr("class", "desc").style("color", textColor);
-              $("p").hide();
-              $("p").fadeIn(1000);
-
-            }
-
-
-
-
-
-
-          });
-
-
-
+        });
+          
         simulation.on("tick", tickActions);
         
+        // Zoom instanstiation
         var zoom_handler = d3.zoom()
+          .scaleExtent(zoomLimits)
           .on("zoom", zoom_actions);
           
+        // Call zoom on svg frame
         svg2.call(zoom_handler);
 
         // Set drag handlers
@@ -298,6 +309,31 @@
 
           return text;
         }
+        
+        function makeRandNodes(count) {
+          var values;
+          for(var i = 0; i < count; i++) {
+            //values = {"name": makeRandText(10), "sex": Math.floor(Math.random * 2) = 0 ? 'M' : ' F'};
+            values = {"name": makeRandText(Math.ceil(Math.random()*10))};
+            rand_nodes.push(values);
+          }
+        }
+        
+        function makeRandLinks() {
+          var num = Math.floor(rand_nodes.length * 1.25);
+          var s;
+          var t;
+          var values;
+          for(var i = 0; i < num; i++) {
+            s = Math.floor(Math.random() * rand_nodes.length);
+            t = Math.floor(Math.random() * rand_nodes.length);
+            while(s == t) {
+              t = Math.floor(Math.random() * rand_nodes.length);
+            }
+            values = {"source": rand_nodes[s]["name"], "target": rand_nodes[t]["name"]};
+            rand_links.push(values);
+          }
+        }
 
         // Tick handler
         function tickActions() {
@@ -337,6 +373,7 @@
           d.fy = null;
         }
         
+        // Zoom handler
         function zoom_actions(){
           node.attr("transform", d3.event.transform);
           link.attr("transform", d3.event.transform);
