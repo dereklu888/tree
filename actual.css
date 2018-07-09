@@ -51,16 +51,24 @@ ul {
 
 li {
   float: left;
-
+  color: #505050;
 }
 
 li a {
   display: block;
-  color: #505050;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
   font: 14px sans-serif;
+  color: #505050;
+}
+
+.normal {
+  color: #505050;
+}
+
+.secret {
+  color: #202020;
 }
 
 .credits {
