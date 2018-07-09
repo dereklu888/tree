@@ -12,6 +12,11 @@
   stroke-opacity: 0.6;
 }
 
+.frame {
+  display: block;
+  margin: auto;
+}
+
 .nodes circle {
   stroke: #fff;
   stroke-width: 1.5px;
@@ -106,9 +111,9 @@ li a {
 .credits {
   display: block;
   float: right;
-  color: #606060;
+  color: #505050;
   font: 14px sans-serif;
-  padding: 4px 16px;
+  padding: 18px 32px;
   text-align: center;
   align: right;
   text-decoration: none;

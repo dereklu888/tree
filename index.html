@@ -42,19 +42,18 @@
   </head>
 
   <body>
+    <title>Something Tree</title>
     <table class="credits">
       <ul>
-        <li><a href="about.html">About</a></li>
-        <li><a href="info.html">Info</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="donate.html">Donate</a></li>
+        <li><a href="pages/about.html">About</a></li>
+        <li><a href="pages/info.html">Info</a></li>
+        <li><a href="pages/contact.html">Contact</a></li>
+        <li><a href="https://www.buymeacoffee.com/">Donate</a></li>
       </ul>
         <div class="credits">Created by Derek, Vineeth, Richard, and Sid</div>
 
-
     </table>
     <script type="text/javascript">
-
       /* TODO: fix window resizing, add footer stuffs to index.html
         get data, make nodes bigger, beautify text
 
@@ -62,12 +61,31 @@
       // Useful information at www.puzzlr.org/force-graphs-with-d3/
 
       // SVG frame dimensions
-      var w = 1500;
-      var h = 600;
+      var w = window.innerWidth
+        || document.documentElement.clientWidth
+        || document.body.clientWidth;
+      
+      // Subtract 15px from width as approximation of svg margins
+      w = w - 15;
+
+      var h = window.innerHeight
+        || document.documentElement.clientHeight
+        || document.body.clientHeight;
+      
+      // Set svg height as 75% of window height
+      h = Math.floor(h * 0.75);
 
       // Node selected border color
       var strokeWidth = 1.25;
       var strokeColor = "white";
+      
+      // Border properties
+      var borderOn = true;
+      var borderColor = "#707070";
+      var borderWidth = 1;
+      
+      // Graph frame properties
+      var frameColor = "none";
 
       // Limits for zooming
       // First value is for zoom out,
@@ -173,13 +191,28 @@
 
       var nodes_data = rand_nodes;
       var link_data = rand_links;
-
+      
       // Force graph
       var svg2 = d3.select("body")
                   .append("svg")
                   .attr("width", w)
                   .attr("height", h)
+                  .style("text-align", "center")
                   .call(d3.zoom().on("zoom", zoom_actions));
+                  
+      // Border draw
+      if(borderOn) {
+        var rect = svg2.append("rect")
+          .attr("x", 0)
+          .attr("y", 0)
+          .attr("width", w)
+          .attr("height", h)
+          .attr("stroke", borderColor)
+          .attr("stroke-width", borderWidth)
+          .attr("fill", frameColor);
+      }
+      
+
 
       d3.select("body").style("background-color", backgroundColor);
 
@@ -238,12 +271,13 @@
         .attr("fill", function(d) {
           // Set node color based on name length
           // Should be changed later
-          if(d.name.length > 7) {
+          /*if(d.name.length > 7) {
             return "pink";
           } else if(d.name.length > 4) {
             return "orange";
           }
-          return "red";
+          return "red";*/
+          return '#'+Math.random().toString(16).substr(-6);;
         })
         // Select and on click node actions
         .on("mousedown", function(d) {
@@ -352,6 +386,15 @@
             rand_links.push(values);
           }
         }
+        
+        function makeRandColor() {
+          var c = '';
+          while (c.length < 7) {
+            c += (Math.random()).toString(16).substr(-6).substr(-1)
+          }
+          return '#'+c;
+        }
+
 
         // Tick handler
         function tickActions() {
@@ -399,6 +442,7 @@
         }
 
       </script>
+      
   </body>
 
 </html>
