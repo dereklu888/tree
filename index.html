@@ -42,7 +42,23 @@
   </head>
 
   <body>
+    <table class="credits">
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="info.html">Info</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="donate.html">Donate</a></li>
+      </ul>
+        <div class="credits">Created by Derek, Vineeth, Richard, and Sid</div>
+
+
+    </table>
     <script type="text/javascript">
+
+      /* TODO: fix window resizing, add footer stuffs to index.html
+        get data, make nodes bigger, beautify text
+
+      */
       // Useful information at www.puzzlr.org/force-graphs-with-d3/
 
       // SVG frame dimensions
@@ -209,14 +225,16 @@
       var labels = gnodes.append("text")
         .attr("class", "unselectable")
         .text(function(d) { return d.name; })
-        .style("fill", textColor);
+        .style("fill", textColor)
+        .style("translate","5px");
+
 
       var pastname = "start";
 
       // Draw nodes
       var node = gnodes.append("circle")
         .attr("class", "node")
-        .attr("r", 5)
+        .attr("r", 8)
         .attr("fill", function(d) {
           // Set node color based on name length
           // Should be changed later
