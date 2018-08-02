@@ -118,6 +118,8 @@
       Phasellus quam purus, vulputate sit amet nunc in, feugiat aliquam mi. Ut vel elementum magna. \
       Nullam consectetur venenatis diam id auctor. Ut sagittis a nisi sit amet efficitur. \
       Aenean sit amet commodo risus. Donec dapibus ultrices odio, ut consequat libero viverra vel. ";
+      
+      
 
       // Nodes information
       /*var nodes_data =  [
@@ -183,14 +185,78 @@
         {"source": "Jack", "target": "Alexis", "type":"E"},
         {"source": "Thompson", "target": "Jack", "type":"A"}
       ];*/
+      
+      var nodes_data = [{"name": "Trojan", "type": "Malware", "description": "Malware that pretends to be a useful or legitimate program, but in reality causes harm or makes the computer vulnerable."},
+                        {"name": "Ransomware", "type": "Malware", "description": "Malware that locks a user from accessing his or her data and attempts to extort money from the user in exchange for access."},
+                        {"name": "Backdoors", "type": "Malware", "description": "Malware that creates more vulnerabilities in a user’s system which allows for the introduction of malware later on."},
+                        {"name": "Rootkits", "type": "Malware", "description": "Malware that is able to modify the user’s operating system so that it remains hidden from the user, allowing it to run malicious code without detection."},
+                        {"name": "Worm", "type": "Malware", "description": "Malware that replicates itself across a network of computers in order to have a larger effect with whatever purpose it is trying to achieve."},
+                        {"name": "Keylogger", "type": "Malware", "description": "A keylogger records the keystrokes of a user, allowing it to access important and personal information such as credit card information, bank information, passwords, etc."},
+                        {"name": "Bot (Botnet)", "type": "Malware", "description": "A bot is a computer that has been infected with malicious code that, when paired with a large amount of other bots (a botnet), can be used to execute distributed denial of service attacks (DDoS attacks) or email spam."},
+                        {"name": "Rogue Security Software", "type": "Malware", "description": "A type of program that pretends to detect and remove malware for a fee; it claims to scan for malware but rather shows you fake detections and warnings, telling you that you need to pay to register the software or remove the fake threats from your PC."},
+                        {"name": "Macro Malware", "type": "Malware", "description": "Malware that takes advantage of the feature in Microsoft Office which allows you to automate certain tasks (Macros) by using it to download threats onto the user’s computer. These are usually sent as Microsoft Office attachments to emails which offers the user a sum of money and tells them that all they have to do is open the document for more details."},
+                        {"name": "Wiper", "type": "Malware", "description": "Malware that wipes a computer’s hard drive. Usually used in conjunction with other malware, for example, a ransomware that would threaten to wipe the hard drive if the condition was not met."},
+                        {"name": "Browser Hijacking", "type": "Malware", "description": "Malware that modifies users browser settings without permission. This is usually used to increase page visits for the owners website or to produce ad revenue. Often times used in conjunction with keyloggers to gather personal information such as access to emails and bank accounts"},
+                        {"name": "Potentially Unwanted Programs", "type": "Malware", "description": "Programs that don’t classify as malware, but can create harms to computers. These programs are capable of slowing down computers as well as creating annoyances for the user."},
+                        {"name": "Spyware", "type": "Malware", "description": "Software that collects user information after being installed on a computer. Often unnoticed, spyware sends information back to the attacker, often used to gain sensitive data such as passwords."},
+                        {"name": "Adware", "type": "Malware", "description": "Software used to display unwanted advertisements on computers, gaining revenue for the attacker."},
+                        {"name": "Viruses", "type": "Malware", "description": "Software that self replicates and attempts to spread to other computers. Not all viruses carry malicious payloads, though most are associated with other types of malware."},
+                        {"name": "Boot Sector", "type": "Malware", "description": "Malware that conceals itself or executes in the boot sector, making it difficult to prevent. The boot sector is automatically executed at startup, allowing malicious programs to be run without usual operating system or antivirus protections."},
+                        {"name": "Vulnerability", "type": "Malware", "description": "Potential exploit from errors or bugs in software that malware can use to create harmful effects, often serving as an entrance for malware to infect computers."},
+                        {"name": "Denial of Service", "type": "Attack", "description": "Attempt to flood networks with traffic in excess of normal capacity, bringing the networks to a halt. Examples include the 2016 Dyn attack from the Mirai botnet. DoS attacks are used to halt of the operation of websites."},
+                        {"name": "Phishing Emails", "type": "Social Engineering", "description": "Emails that appear to be coming from legitimate businesses offering services and deals that are often too good to be true, with the goal of either scamming money from the host or infecting the host with some sort of virus or keylogger to get other personal information from him or her."},
+                        {"name": "Tech Support Scams", "type": "Social Engineering", "description": "Most tech support scams start with pop-ups that say that the user’s computer has been infected with some sort of virus and the only way to remove it is to call their number. When called, the user is greeted by someone who says they are from a reputable company like Apple or Microsoft and asks for control of the user’s computer in order to help them, when in reality it allows the scammer to steal their personal information."},
+                        {"name": "Phishing Websites", "type": "Social Engineering", "description": "Websites that try to imitate the design of legitimate and popular websites (and use similar URLs) in order to get people’s login IDs and passwords or other personal information."},
+                        {"name": "Baiting", "type": "Social Engineering", "description": "Manipulating users into using physical media such as CDs or USBs on computers, with malicious programs installed on these devices. Designed to exploit natural curiosity, victims take the bait laid out for them. Common examples include employees using unknown USBs on company computers. Files on the USB are often named to encourage users to click on the file, allowing malicious programs to run. "},
+                        {"name": "Spear Phishing", "type": "Social Engineering", "description": "Highly targeted and specialized attempts to trick users into divulging sensitive information. Usually used to gain information from a specific group, spear phishing differs from phishing in the scope of its attack. Because of the small scale, spear phishing has higher success rates, often done with research to tailor campaigns to target audiences."},
+                        {"name": "Watering Hole", "type": "Social Engineering", "description": "Rather than directly attack a user, watering hole attacks exploit indirect links to the target. Attackers look for vulnerabilities on websites visited by user, and place malicious software on the website to be transferred to the target. "},
+                        {"name": "Pharming", "type": "Attack", "description": "A cyber attack that is intended to redirect from a genuine website to a fake website. Is generally used with malware to alter host files to ensure a redirect, or exploiting vulnerabilities in DNS servers ."},
+                        {"name": "Logic Bomb", "type": "Attack", "description": "A piece of malicious code purposely planted in a software system. The code will execute a malicious function when a certain condition is met. For example it will start deleting files from a computer on a certain date."}];
 
-      var rand_links = [];
+
+      var link_data = [{"source": "Trojan", "target": "Keylogger", "type":"A" },
+                      {"source": "Trojan", "target": "Spyware", "type":"A" },
+                      {"source": "Trojan", "target": "Adware", "type":"A"},
+                      {"source": "Trojan", "target": "Backdoors", "type":"A"},
+                      {"source": "Trojan", "target": "Potentially Unwanted Programs", "type":"A" },
+                      {"source": "Trojan", "target": "Viruses", "type":"A" },
+                      {"source": "Trojan", "target": "Rogue Security Software", "type":"A" },
+                      {"source": "Viruses", "target": "Backdoors", "type":"A"},
+                      {"source": "Viruses", "target": "Rootkits", "type":"A"},
+                      {"source": "Browser Hijacking", "target": "Adware", "type":"A" },
+                      {"source": "Browser Hijacking", "target": "Spyware", "type":"A" },
+                      {"source": "Ransomware", "target": "Wiper", "type":"A"},
+                      {"source": "Ransomware", "target": "Backdoors", "type":"A"},
+                      {"source": "Ransomware", "target": "Rootkits", "type":"A"},
+                      {"source": "Ransomware", "target": "Vulnerability", "type":"A"},
+                      {"source": "Ransomware", "target": "Boot Sector", "type":"A"},
+                      {"source": "Worm", "target": "Backdoors", "type":"A"},
+                      {"source": "Worm", "target": "Bot (Botnet)", "type":"A"},
+                      {"source": "Worm", "target": "Backdoors", "type":"A"},
+                      {"source": "Macro Malware", "target": "Worm", "type":"A"},
+                      {"source": "Keylogger", "target": "Spyware", "type":"A"},
+                      {"source": "Vulnerability", "target": "Boot Sector", "type":"A"},
+                      {"source": "Vulnerability", "target": "Trojan", "type":"A"},
+                      {"source": "Vulnerability", "target": "Viruses", "type":"A"},
+                      {"source": "Vulnerability", "target": "Worm", "type":"A"},
+                      {"source": "Vulnerability", "target": "Bot (Botnet)", "type":"A"},
+                      {"source": "Bot (Botnet)", "target": "Denial of Service", "type":"A"},
+                      {"source": "Phishing Emails", "target": "Spear Phishing", "type":"A" },
+                      {"source": "Phishing Websites", "target": "Spear Phishing", "type":"A" },
+                      {"source": "Baiting", "target": "Viruses", "type":"A"},
+                      {"source": "Watering Hole", "target": "Vulnerability", "type":"A"},
+                      {"source": "Tech Support Scams", "target": "Potentially Unwanted Programs", "type":"A" },
+                      {"source": "Tech Support Scams", "target": "Rogue Security Software", "type":"A" },
+                      {"source": "Pharming", "target": "Watering Hole", "type":"A" }];
+
+                      
+      /*var rand_links = [];
 
       makeRandNodes(50);
       makeRandLinks();
 
       var nodes_data = rand_nodes;
-      var link_data = rand_links;
+      var link_data = rand_links;*/
       
       // Force graph
       var svg2 = d3.select("body")
@@ -271,13 +337,13 @@
         .attr("fill", function(d) {
           // Set node color based on name length
           // Should be changed later
-          /*if(d.name.length > 7) {
-            return "pink";
-          } else if(d.name.length > 4) {
+          if(d.type == "Malware") {
+            return "red";
+          } else if(d.type == "Attack") {
             return "orange";
           }
-          return "red";*/
-          return '#'+Math.random().toString(16).substr(-6);;
+          return "pink";
+          //return '#'+Math.random().toString(16).substr(-6);;
         })
         // Select and on click node actions
         .on("mousedown", function(d) {
@@ -298,7 +364,7 @@
 
             // Set text
             detailLabel = d3.select("body").append("p").text("Selected node: " + d.name).attr("class", "desc").style("color", textColor);
-            detailLabelDesc = d3.select("body").append("p").text(makeRandSentence(10)).attr("class", "desc").style("color", textColor);
+            detailLabelDesc = d3.select("body").append("p").text(d.description).attr("class", "desc").style("color", textColor);
             $("p").hide();
             $("p").fadeIn(1000);
 

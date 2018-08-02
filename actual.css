@@ -14,7 +14,6 @@ h2 {
   text-align: center;
   color: white;
   
-  
   position: absolute;
   top: 55%;
   left: 50%;
@@ -41,7 +40,6 @@ ul {
   margin: 0;
   padding: 2px 0px;
   overflow: hidden;
-  background-color: #202020;
   
   position: absolute;
   bottom: 0;
@@ -63,14 +61,6 @@ li a {
   color: #505050;
 }
 
-.normal {
-  color: #505050;
-}
-
-.secret {
-  color: #202020;
-}
-
 .credits {
   display: block;
   float: right;
@@ -85,6 +75,10 @@ li a {
   bottom: 0;
   
   float: bottom;
+}
+
+.secret {
+  color: #202020;
 }
 
 /* Change the link color to #111 (black) on hover */
