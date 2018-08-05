@@ -64,26 +64,26 @@
       var w = window.innerWidth
         || document.documentElement.clientWidth
         || document.body.clientWidth;
-      
+
       // Subtract 15px from width as approximation of svg margins
       w = w - 15;
 
       var h = window.innerHeight
         || document.documentElement.clientHeight
         || document.body.clientHeight;
-      
+
       // Set svg height as 75% of window height
       h = Math.floor(h * 0.75);
 
       // Node selected border color
       var strokeWidth = 1.25;
       var strokeColor = "white";
-      
+
       // Border properties
       var borderOn = true;
       var borderColor = "#707070";
       var borderWidth = 1;
-      
+
       // Graph frame properties
       var frameColor = "none";
 
@@ -95,7 +95,7 @@
       var zoomLimits = [0.5, 4];
 
       // Spacing of labels from node
-      var labelSpacingX = 7;
+      var labelSpacingX = 12;
       var labelSpacingY = 4;
 
       // Color of text
@@ -120,78 +120,65 @@
       Aenean sit amet commodo risus. Donec dapibus ultrices odio, ut consequat libero viverra vel. ";
 
       // Nodes information
-      /*var nodes_data =  [
-        {"name": "Lillian", "sex": "F"},
-        {"name": "Gordon", "sex": "F"},
-        {"name": "Sylvester", "sex": "M"},
-        {"name": "Mary", "sex": "F"},
-        {"name": "Helen", "sex": "F"},
-        {"name": "Jamie", "sex": "M"},
-        {"name": "Jessie", "sex": "F"},
-        {"name": "Ashton", "sex": "M"},
-        {"name": "Duncan", "sex": "M"},
-        {"name": "Evette", "sex": "F"},
-        {"name": "Mauer", "sex": "M"},
-        {"name": "Fray", "sex": "F"},
-        {"name": "Duke", "sex": "M"},
-        {"name": "Baron", "sex": "M"},
-        {"name": "Infante", "sex": "M"},
-        {"name": "Percy", "sex": "M"},
-        {"name": "Cynthia", "sex": "F"},
-        {"name": "Thompson", "sex" : "M"},
-        {"name": "Joe", "sex" : "M"},
-        {"name": "John", "sex" : "M"},
-        {"name": "Alexis", "sex" : "M"},
-        {"name": "Jonathan", "sex" : "M"},
-        {"name": "Jack", "sex" : "M"}
-      ];*/
+      var nodes_data =  [
+      {"name": "Computer Threats", "type": "Malware", "description": ""},
+      {"name": "General Malware", "type": "Malware", "description": ""},
+      {"name": "Social Engineering", "type": "Malware", "description": ""},
 
-      var rand_nodes = [];
+      {"name": "Trojan", "type": "Malware", "description": "Malware that pretends to be a useful or legitimate program, but in reality causes harm or makes the computer vulnerable."},
+      {"name": "Ransomware", "type": "Malware", "description": "Malware that locks a user from accessing his or her data and attempts to extort money from the user in exchange for access."},
+      {"name": "Backdoors", "type": "Malware", "description": "Malware that creates more vulnerabilities in a user’s system which allows for the introduction of malware later on."},
+      {"name": "Rootkits", "type": "Malware", "description": "Malware that is able to modify the user’s operating system so that it remains hidden from the user, allowing it to run malicious code without detection."},
+      {"name": "Worm", "type": "Malware", "description": "Malware that replicates itself across a network of computers in order to have a larger effect with whatever purpose it is trying to achieve."},
+      {"name": "Keylogger", "type": "Malware", "description": "A keylogger records the keystrokes of a user, allowing it to access important and personal information such as credit card information, bank information, passwords, etc."},
+      {"name": "Bot (Botnet)", "type": "Malware", "description": "A bot is a computer that has been infected with malicious code that, when paired with a large amount of other bots (a botnet), can be used to execute distributed denial of service attacks (DDoS attacks) or email spam."},
+      {"name": "Rogue Security Software", "type": "Malware", "description": "A type of program that pretends to detect and remove malware for a fee; it claims to scan for malware but rather shows you fake detections and warnings, telling you that you need to pay to register the software or remove the fake threats from your PC."},
+      {"name": "Macro Malware", "type": "Malware", "description": "Malware that takes advantage of the feature in Microsoft Office which allows you to automate certain tasks (Macros) by using it to download threats onto the user’s computer. These are usually sent as Microsoft Office attachments to emails which offers the user a sum of money and tells them that all they have to do is open the document for more details."},
+      {"name": "Wiper", "type": "Malware", "description": "Malware that wipes a computer’s hard drive. Usually used in conjunction with other malware, for example, a ransomware that would threaten to wipe the hard drive if the condition was not met."},
+      {"name": "Browser Hijacking", "type": "Malware", "description": "Malware that modifies users browser settings without permission. This is usually used to increase page visits for the owners website or to produce ad revenue. Often times used in conjunction with keyloggers to gather personal information such as access to emails and bank accounts"},
+
+      {"name": "Phishing Emails", "type": "Scam", "description": "Emails that appear to be coming from legitimate businesses offering services and deals that are often too good to be true, with the goal of either scamming money from the host or infecting the host with some sort of virus or keylogger to get other personal information from him or her."},
+      {"name": "Tech Support Scams", "type": "Scam", "description": "Most tech support scams start with pop-ups that say that the user’s computer has been infected with some sort of virus and the only way to remove it is to call their number. When called, the user is greeted by someone who says they are from a reputable company like Apple or Microsoft and asks for control of the user’s computer in order to help them, when in reality it allows the scammer to steal their personal information."},
+
+      {"name": "Pharming", "type": "Cyber Attack", "description": "A cyber attack that is intended to redirect from to a fake website. Is generally used with malware to alter host files to ensure a redirect, or exploiting vulnerabilities in DNS servers ."},
+      {"name": "Logic Bomb", "type": "Malicious Code", "description": "A piece of malicious code purposely planted in a software system. The code will execute a malicious function when a certain condition is met. For example it will start deleting files from a computer on a certain date."}
+
+
+      ];
+
+    //  var rand_nodes = [];
 
       // Links information
-      /*var link_data = [
-        {"source": "Sylvester", "target": "Gordon", "type":"A" },
-        {"source": "Sylvester", "target": "Lillian", "type":"A" },
-        {"source": "Sylvester", "target": "Mary", "type":"A"},
-        {"source": "Sylvester", "target": "Jamie", "type":"A"},
-        {"source": "Sylvester", "target": "Jessie", "type":"A"},
-        {"source": "Sylvester", "target": "Helen", "type":"A"},
-        {"source": "Helen", "target": "Gordon", "type":"A"},
-        {"source": "Mary", "target": "Lillian", "type":"A"},
-        {"source": "Ashton", "target": "Mary", "type":"A"},
-        {"source": "Duncan", "target": "Jamie", "type":"A"},
-        {"source": "Gordon", "target": "Jessie", "type":"A"},
-        {"source": "Sylvester", "target": "Fray", "type":"E"},
-        {"source": "Fray", "target": "Mauer", "type":"A"},
-        {"source": "Fray", "target": "Cynthia", "type":"A"},
-        {"source": "Fray", "target": "Percy", "type":"A"},
-        {"source": "Percy", "target": "Cynthia", "type":"A"},
-        {"source": "Infante", "target": "Duke", "type":"A"},
-        {"source": "Duke", "target": "Gordon", "type":"A"},
-        {"source": "Duke", "target": "Sylvester", "type":"A"},
-        {"source": "Baron", "target": "Duke", "type":"A"},
-        {"source": "Baron", "target": "Sylvester", "type":"E"},
-        {"source": "Evette", "target": "Sylvester", "type":"E"},
-        {"source": "Cynthia", "target": "Sylvester", "type":"E"},
-        {"source": "Cynthia", "target": "Jamie", "type":"E"},
-        {"source": "Mauer", "target": "Jessie", "type":"E"},
-        {"source": "Thompson", "target": "Joe", "type":"A"},
-        {"source": "Joe", "target": "John", "type":"A"},
-        {"source": "Alexis", "target": "Jonathan", "type":"A"},
-        {"source": "Alexis", "target": "Joe", "type":"A"},
-        {"source": "Alexis", "target": "John", "type":"A"},
-        {"source": "Jack", "target": "Alexis", "type":"E"},
-        {"source": "Thompson", "target": "Jack", "type":"A"}
-      ];*/
+      var link_data = [
+        {"source": "General Malware", "target": "Computer Threats", "type":"A" },
+        {"source": "Social Engineering", "target": "Computer Threats", "type":"A" },
 
-      var rand_links = [];
+        {"source": "Trojan", "target": "General Malware", "type":"A" },
+        {"source": "Ransomware", "target": "General Malware", "type":"A" },
+        {"source": "Backdoors", "target": "General Malware", "type":"A" },
+        {"source": "Rootkits", "target": "General Malware", "type":"A" },
+        {"source": "Worm", "target": "General Malware", "type":"A" },
+        {"source": "Keylogger", "target": "General Malware", "type":"A" },
+        {"source": "Bot (Botnet)", "target": "General Malware", "type":"A" },
+        {"source": "Rogue Security Software", "target": "General Malware", "type":"A" },
+        {"source": "Macro Malware", "target": "General Malware", "type":"A" },
+        {"source": "Wiper", "target": "General Malware", "type":"A" },
+        {"source": "Browser Hijacking", "target": "General Malware", "type":"A" },
 
-      makeRandNodes(50);
-      makeRandLinks();
+        {"source": "Phishing Emails", "target": "Social Engineering", "type":"A" },
+        {"source": "Tech Support Scams", "target": "Social Engineering", "type":"A" },
+        {"source": "Pharming", "target": "Social Engineering", "type":"A" },
+        {"source": "Logic Bomb", "target": "Social Engineering", "type":"A" }
+      ];
 
-      var nodes_data = rand_nodes;
-      var link_data = rand_links;
-      
+    //  var rand_links = [];
+
+    //  makeRandNodes(50);
+    //  makeRandLinks();
+
+    //  var nodes_data = rand_nodes;
+    //  var link_data = rand_links;
+
       // Force graph
       var svg2 = d3.select("body")
                   .append("svg")
@@ -199,7 +186,9 @@
                   .attr("height", h)
                   .style("text-align", "center")
                   .call(d3.zoom().on("zoom", zoom_actions));
-                  
+
+
+
       // Border draw
       if(borderOn) {
         var rect = svg2.append("rect")
@@ -211,13 +200,14 @@
           .attr("stroke-width", borderWidth)
           .attr("fill", frameColor);
       }
-      
+
 
 
       d3.select("body").style("background-color", backgroundColor);
 
+
       var simulation = d3.forceSimulation()
-                        .nodes(nodes_data);
+                        .nodes(nodes_data)
 
       // Used to store currently selected node
       var past = null;
@@ -232,12 +222,16 @@
 
       // Apply force pointing toward center
       simulation.force("center_force", d3.forceCenter(w/2, h/2));
-
       var link_force = d3.forceLink(link_data)
                         .id(function(d) {return d.name});
 
       simulation.force("links", link_force);
-
+      simulation.force("links", d3.forceLink().links(link_data)
+                  .distance(80));
+      simulation.force("separation", d3.forceLink().strength(0.025));
+      simulation.force("charge", d3.forceManyBody().strength(-200));
+      simulation.force("clipping", d3.forceCollide().radius(12));
+      simulation.force("center", d3.forceCenter(w / 2, h / 2));
       // Draw links
       var link = svg2.append("g")
         .attr("class", "links")
@@ -245,6 +239,7 @@
         .data(link_data)
         .enter()
         .append("line")
+
         .attr("stroke-width", 2);
 
       // Create label + node group
@@ -258,8 +253,7 @@
       var labels = gnodes.append("text")
         .attr("class", "unselectable")
         .text(function(d) { return d.name; })
-        .style("fill", textColor)
-        .style("translate","5px");
+        .style("fill", textColor);
 
 
       var pastname = "start";
@@ -267,7 +261,7 @@
       // Draw nodes
       var node = gnodes.append("circle")
         .attr("class", "node")
-        .attr("r", 8)
+        .attr("r", 12)
         .attr("fill", function(d) {
           // Set node color based on name length
           // Should be changed later
@@ -298,7 +292,7 @@
 
             // Set text
             detailLabel = d3.select("body").append("p").text("Selected node: " + d.name).attr("class", "desc").style("color", textColor);
-            detailLabelDesc = d3.select("body").append("p").text(makeRandSentence(10)).attr("class", "desc").style("color", textColor);
+            detailLabelDesc = d3.select("body").append("p").text(d.description).attr("class", "desc").style("color", textColor);
             $("p").hide();
             $("p").fadeIn(1000);
 
@@ -386,7 +380,7 @@
             rand_links.push(values);
           }
         }
-        
+
         function makeRandColor() {
           var c = '';
           while (c.length < 7) {
@@ -442,7 +436,7 @@
         }
 
       </script>
-      
+
   </body>
 
 </html>
