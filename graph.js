@@ -125,7 +125,7 @@ var nodes_data = [{
     "description": "Software that self replicates and attempts to spread to other computers. Not all viruses carry malicious payloads, though most are associated with other types of malware."
   },
   {
-    "name": "Boot Sector",
+    "name": "Bootkits",
     "type": "Malware",
     "description": "Malware that conceals itself or executes in the boot sector, making it difficult to prevent. The boot sector is automatically executed at startup, allowing malicious programs to be run without usual operating system or antivirus protections."
   },
@@ -175,14 +175,14 @@ var nodes_data = [{
   {
     "name": "Pharming",
     "type": "Cyber Attack",
-    "description": "A cyber attack that is intended to redirect from to a fake website. Is generally used with malware to alter host files to ensure a redirect, or exploiting vulnerabilities in DNS servers ."
+    "description": "A cyber attack that is intended to redirect from a genuine website to a fake website. Is generally used with malware to alter host files to ensure a redirect, or exploiting vulnerabilities in DNS servers."
   },
+  
   {
-    "name": "Logic Bomb",
-    "type": "Malicious Code",
-    "description": "A piece of malicious code purposely planted in a software system. The code will execute a malicious function when a certain condition is met. For example it will start deleting files from a computer on a certain date."
+    "name": "Email Hijacking",
+    "type": "Cyber Attack",
+    "description": "Stolen or compromised email accounts are used to spread spam or malicious software. Email senders often appear trusted and use this to persuade users to open and install disguised malware or give away personal information."
   }
-
 
 ];
 
@@ -256,7 +256,7 @@ var link_data = [{
     "type": "A"
   },
   {
-    "source": "Boot Sector",
+    "source": "Bootkits",
     "target": "General Malware",
     "type": "A"
   },
@@ -292,7 +292,6 @@ var link_data = [{
     "type": "A"
   },
 
-
   {
     "source": "Phishing Emails",
     "target": "Social Engineering",
@@ -309,7 +308,7 @@ var link_data = [{
     "type": "A"
   },
   {
-    "source": "Logic Bomb",
+    "source": "Email Hijacking",
     "target": "Social Engineering",
     "type": "A"
   }

@@ -48,7 +48,7 @@ svg {
 }
 
 h1 {
-  font: 50px sans-serif;
+  font: 50px FuturaHandwritten;
   text-align: center;
   color: white;
   position: absolute;
@@ -68,7 +68,7 @@ h2 {
 }
 
 h3 {
-  font: 16px sans-serif;
+  font: 16px FuturaHandwritten;
   text-align: center;
   color: #777777;
   position: absolute;
@@ -92,7 +92,7 @@ ul {
   display: block;
   float: left;
   color: #606060;
-  font: 14px sans-serif;
+  font: 14px FuturaHandwritten;
   padding: 4px 16px;
   text-align: center;
 }
@@ -107,14 +107,14 @@ li a {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font: 14px sans-serif;
+  font: 14px FuturaHandwritten;
 }
 
 .credits {
   display: block;
   float: right;
   color: #505050;
-  font: 14px sans-serif;
+  font: 14px FuturaHandwritten;
   padding: 18px 32px;
   text-align: center;
   text-decoration: none;
