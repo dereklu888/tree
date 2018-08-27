@@ -1,4 +1,4 @@
-// Useful information at www.puzzlr.org/force-graphs-with-d3/
+﻿// Useful information at www.puzzlr.org/force-graphs-with-d3/
 
 // SVG frame dimensions
 var w = window.innerWidth ||
@@ -61,12 +61,12 @@ var nodes_data = [{
   {
     "name": "General Malware",
     "type": "Malware",
-    "description": ""
+    "description": "Software that is design to cause harm to a user's system."
   },
   {
     "name": "Social Engineering",
     "type": "Malware",
-    "description": ""
+    "description": "Strategies that take advantage of human behavior to steal information or download malware."
   },
 
   {
